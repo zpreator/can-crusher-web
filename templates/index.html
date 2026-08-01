@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Can Crusher</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Can Crusher</h1>
+      <div class="subtitle">Live crush history &amp; stats, reported by the Pico over LAN</div>
+    </div>
+  </header>
+
+  <div class="tiles" id="tiles">
+    <div class="tile">
+      <div class="label">Total crushed</div>
+      <div class="value" id="tile-count">&hellip;</div>
+      <div class="hint" id="tile-count-hint"></div>
+    </div>
+    <div class="tile">
+      <div class="label">Last crush</div>
+      <div class="value" id="tile-last" style="font-size:18px;">&hellip;</div>
+    </div>
+    <div class="tile">
+      <div class="label">Current streak</div>
+      <div class="value" id="tile-streak">&hellip;</div>
+    </div>
+    <div class="tile">
+      <div class="label">Longest streak</div>
+      <div class="value" id="tile-longest-streak">&hellip;</div>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <h2>This week</h2>
+          <div class="card-sub">Reed-switch crushes, last 7 calendar days</div>
+        </div>
+      </div>
+      <div id="chart-week"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <h2>All time &middot; avg crushes/day</h2>
+          <div class="card-sub">By weekday, averaged across all history</div>
+        </div>
+      </div>
+      <div id="chart-weekday"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <h2>Crush activity over time</h2>
+          <div class="card-sub">Density of reed-switch crushes</div>
+        </div>
+        <div class="segmented" id="kde-range">
+          <button data-months="1" class="active">1mo</button>
+          <button data-months="2">2mo</button>
+          <button data-months="3">3mo</button>
+          <button data-months="6">6mo</button>
+          <button data-months="12">12mo</button>
+        </div>
+      </div>
+      <div id="chart-kde"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <h2>Pace toward goal</h2>
+          <div class="card-sub">Cumulative reed-switch crushes vs. the 500-can goal</div>
+        </div>
+      </div>
+      <div id="chart-cumulative"></div>
+    </div>
+
+    <div class="card">
+      <h2>Raw event log</h2>
+      <div class="card-sub">All events, including manual +/&minus; corrections (excluded from charts above)</div>
+      <div class="table-scroll">
+        <table class="events-table">
+          <thead>
+            <tr><th>Time</th><th>Type</th><th>Delta</th><th>Note</th></tr>
+          </thead>
+          <tbody id="events-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <details class="admin">
+    <summary>Admin: reset / set count</summary>
+    <div class="admin-body">
+      <div class="admin-warning">
+        This only changes the server's stored count and history. The Pico's own physical
+        counter and display are <strong>not</strong> updated until it next reboots and
+        re-seeds itself from <code>GET /status</code>.
+      </div>
+      <div class="admin-row">
+        <label for="admin-key">API key</label>
+        <input type="password" id="admin-key" placeholder="X-API-Key" autocomplete="off">
+      </div>
+      <div class="admin-row">
+        <label for="admin-target">Set count to</label>
+        <input type="number" id="admin-target" step="1">
+        <button class="btn" id="admin-set-btn">Set</button>
+        <button class="btn secondary" id="admin-reset-btn">Reset to 0</button>
+      </div>
+      <div class="admin-status" id="admin-status"></div>
+    </div>
+  </details>
+
+  <footer class="note">
+    Server is the source of truth for history and stats; the Pico counts, displays, and
+    plays sounds locally and reports events here asynchronously. Duplicate events from
+    retried batches are a known, low-stakes edge case and are not de-duplicated.
+  </footer>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script src="/static/dashboard.js"></script>
+</body>
+</html>
