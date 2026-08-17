@@ -174,9 +174,21 @@ def admin_adjust():
     return jsonify({"count": count})
 
 
+def _asset_version(filename):
+    path = os.path.join(app.static_folder, filename)
+    try:
+        return int(os.path.getmtime(path))
+    except OSError:
+        return 0
+
+
 @app.route("/", methods=["GET"])
 def dashboard():
-    return render_template("index.html")
+    return render_template(
+        "index.html",
+        css_version=_asset_version("style.css"),
+        js_version=_asset_version("dashboard.js"),
+    )
 
 
 if __name__ == "__main__":
