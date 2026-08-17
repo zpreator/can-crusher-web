@@ -3,6 +3,8 @@
 
   const SVG_NS = "http://www.w3.org/2000/svg";
   const CRUSH_GOAL = 500;
+  const CANS_PER_POUND = 32;
+  const VALUE_PER_POUND = 0.60;
   const MARGIN = { top: 16, right: 14, bottom: 26, left: 34 };
   const VB_W = 640;
   const VB_H = 220;
@@ -517,6 +519,14 @@
       document.getElementById("tile-last").textContent = status.last_event_at
         ? new Date(status.last_event_at).toLocaleString()
         : "never";
+
+      const estWeight = status.count / CANS_PER_POUND;
+      document.getElementById("tile-weight").textContent = `${estWeight.toFixed(1)} lb`;
+      document.getElementById("tile-weight-hint").textContent = `at ${CANS_PER_POUND} cans/lb`;
+
+      const estValue = estWeight * VALUE_PER_POUND;
+      document.getElementById("tile-value").textContent = `$${estValue.toFixed(2)}`;
+      document.getElementById("tile-value-hint").textContent = `at $${VALUE_PER_POUND.toFixed(2)}/lb`;
 
       renderAll();
     } catch (err) {
