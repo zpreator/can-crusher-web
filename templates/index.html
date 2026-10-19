@@ -107,28 +107,6 @@
     </div>
   </div>
 
-  <details class="admin">
-    <summary>Admin: reset / set count</summary>
-    <div class="admin-body">
-      <div class="admin-warning">
-        This only changes the server's stored count and history. The Pico's own physical
-        counter and display are <strong>not</strong> updated until it next reboots and
-        re-seeds itself from <code>GET /status</code>.
-      </div>
-      <div class="admin-row">
-        <label for="admin-key">API key</label>
-        <input type="password" id="admin-key" placeholder="X-API-Key" autocomplete="off">
-      </div>
-      <div class="admin-row">
-        <label for="admin-target">Set count to</label>
-        <input type="number" id="admin-target" step="1">
-        <button class="btn" id="admin-set-btn">Set</button>
-        <button class="btn secondary" id="admin-reset-btn">Reset to 0</button>
-      </div>
-      <div class="admin-status" id="admin-status"></div>
-    </div>
-  </details>
-
   <footer class="note">
     Server is the source of truth for history and stats; the Pico counts, displays, and
     plays sounds locally and reports events here asynchronously. Duplicate events from

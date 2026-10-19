@@ -223,57 +223,6 @@ footer.note {
   line-height: 1.5;
 }
 
-details.admin {
-  margin-top: 20px;
-  background: var(--surface-1);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 12px 16px;
-}
-details.admin summary {
-  cursor: pointer;
-  font-size: 13px;
-  color: var(--text-secondary);
-}
-.admin-body { margin-top: 12px; font-size: 13px; }
-.admin-warning {
-  background: color-mix(in srgb, var(--series-2) 12%, var(--surface-1));
-  border: 1px solid color-mix(in srgb, var(--series-2) 35%, var(--border));
-  border-radius: 8px;
-  padding: 8px 10px;
-  margin-bottom: 10px;
-  color: var(--text-primary);
-  font-size: 12px;
-}
-.admin-row { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }
-.admin-row label { color: var(--text-secondary); font-size: 12px; width: 90px; }
-.admin-row input {
-  background: var(--page-plane);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 5px 8px;
-  color: var(--text-primary);
-  font-family: inherit;
-  font-size: 13px;
-}
-.admin-row input[type="number"] { width: 100px; }
-.admin-row input[type="password"] { width: 200px; }
-button.btn {
-  border: 1px solid var(--border);
-  background: var(--series-1);
-  color: #fff;
-  border-radius: 6px;
-  padding: 6px 12px;
-  font-size: 12px;
-  cursor: pointer;
-  font-family: inherit;
-}
-button.btn.secondary {
-  background: transparent;
-  color: var(--text-primary);
-}
-.admin-status { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
-
 table.events-table {
   width: 100%;
   border-collapse: collapse;

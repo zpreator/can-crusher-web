@@ -551,40 +551,5 @@
     });
   });
 
-  const adminStatus = document.getElementById("admin-status");
-  async function adminAdjust(target) {
-    const key = document.getElementById("admin-key").value;
-    if (!key) {
-      adminStatus.textContent = "Enter the API key first.";
-      return;
-    }
-    adminStatus.textContent = "Working...";
-    try {
-      const res = await fetch("/admin/adjust", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "X-API-Key": key },
-        body: JSON.stringify({ target }),
-      });
-      const body = await res.json();
-      if (!res.ok) {
-        adminStatus.textContent = `Error: ${body.error || res.status}`;
-        return;
-      }
-      adminStatus.textContent = `Done. Server count is now ${body.count}.`;
-      load();
-    } catch (err) {
-      adminStatus.textContent = `Request failed: ${err.message}`;
-    }
-  }
-  document.getElementById("admin-set-btn").addEventListener("click", () => {
-    const val = Number(document.getElementById("admin-target").value);
-    if (!Number.isInteger(val)) {
-      adminStatus.textContent = "Enter a whole number.";
-      return;
-    }
-    adminAdjust(val);
-  });
-  document.getElementById("admin-reset-btn").addEventListener("click", () => adminAdjust(0));
-
   load();
 })();
